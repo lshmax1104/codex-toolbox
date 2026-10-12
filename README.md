@@ -1,6 +1,54 @@
 # Codex Toolbox MCP
 
+**A local Model Context Protocol (MCP) server for OpenAI Codex with 57 tools.**
+File search and editing, backups, ZIP archives, PDF and Word extraction, CSV/Excel processing,
+SQLite queries, Git inspection, HTTP requests, image conversion, persistent notes, and named
+development tasks are available over stdio. It exposes 2 resources and 3 prompts, uses the
+official Python MCP SDK, and requires no LLM API key. See [English setup](#english-setup-and-container-discovery).
+
 Codex에서 쓰는 로컬 통합 MCP 서버입니다. Python 공식 MCP SDK의 stdio 전송을 사용하며, **57개 도구 · 자료 2개 · 작업 템플릿 3개**를 제공합니다. 파일·문서·데이터·Git·이미지·메모 기능은 별도 AI API 키 없이 실행됩니다.
+
+## English setup and container discovery
+
+### Windows installation for Codex
+
+```powershell
+git clone https://github.com/lshmax1104/codex-toolbox.git
+cd codex-toolbox
+.\Install-Codex.ps1
+```
+
+The installer creates a virtual environment, writes an ignored local `settings.json` from
+`settings.example.json`, and registers the stdio server with Codex. Reload the MCP connection
+after installation. Configure project directories in `allowed_roots`.
+
+### Docker for Linux clients and MCP directory inspection
+
+```sh
+docker build -t codex-toolbox .
+docker run --rm -i codex-toolbox
+# Inspect the declared capabilities without starting a protocol session:
+docker run --rm codex-toolbox --check
+```
+
+The image runs as an unprivileged user and starts the stdio MCP server without credentials or
+external service connections. It creates an empty workspace at `/home/mcp/Documents/Codex`.
+To process local project files, explicitly mount a project directory there:
+
+```sh
+docker run --rm -i -v /absolute/project/path:/home/mcp/Documents/Codex codex-toolbox
+```
+
+Do not use `-t` for MCP stdio connections. Internal state is ephemeral unless separately
+persisted. The image includes Python and Git; the optional `node-version` task requires an
+image with Node.js installed. SQLite writes and private-network web requests are disabled
+by default. The server has no HTTP listener and this image does not expose your local
+Codex session, files, or credentials to a public endpoint.
+
+`glama.json` declares the GitHub maintainer for directory ownership. A directory listing
+still requires repository access, submission and a successful build/introspection; metadata
+alone does not guarantee search visibility. The code and its runtime configuration are
+separate: local settings, credentials, backups and notes are excluded from Git and Docker.
 
 ## 빠른 시작
 

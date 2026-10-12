@@ -1,0 +1,13 @@
+.git
+.venv
+.state
+__pycache__
+.pytest_cache
+settings.json
+settings.local.json
+.env
+.env.*
+work
+verification.json
+installed-verification.json
+*.log
