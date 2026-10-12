@@ -7,7 +7,7 @@ Codex에서 쓰는 로컬 통합 MCP 서버입니다. Python 공식 MCP SDK의 s
 Windows와 Python 3.10 이상, Codex CLI가 필요합니다.
 
 ```powershell
-git clone https://github.com/sweetmini101-sudo/codex-toolbox.git
+git clone https://github.com/lshmax1104/codex-toolbox.git
 cd codex-toolbox
 .\Install-Codex.ps1
 ```
