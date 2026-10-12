@@ -1,0 +1,52 @@
+{
+  "allowed_roots": [
+    "~/Documents/Codex"
+  ],
+  "modules": [
+    "system",
+    "files",
+    "archives",
+    "data",
+    "documents",
+    "images",
+    "sqlite",
+    "git",
+    "web",
+    "integrations",
+    "memory",
+    "development"
+  ],
+  "max_file_bytes": 20971520,
+  "max_text_chars": 60000,
+  "sqlite_writes": false,
+  "network_allowed_hosts": [],
+  "web_allow_private_network": false,
+  "git_executable": null,
+  "services": {},
+  "tasks": {
+    "python-version": {
+      "description": "현재 MCP 서버의 Python 버전 확인",
+      "command": [
+        "{python}",
+        "--version"
+      ],
+      "timeout_seconds": 10
+    },
+    "node-version": {
+      "description": "설치된 Node.js 버전 확인",
+      "command": [
+        "node",
+        "--version"
+      ],
+      "timeout_seconds": 10
+    },
+    "git-version": {
+      "description": "설치된 Git 버전 확인",
+      "command": [
+        "git",
+        "--version"
+      ],
+      "timeout_seconds": 10
+    }
+  }
+}

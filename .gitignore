@@ -1,0 +1,14 @@
+.venv/
+.state/
+__pycache__/
+.pytest_cache/
+*.pyc
+settings.json
+settings.local.json
+codex-config.toml
+verification.json
+installed-verification.json
+work/
+.env
+.env.*
+*.log
