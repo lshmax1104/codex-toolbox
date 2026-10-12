@@ -1,0 +1,31 @@
+name: MCP container verification
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "Dockerfile"
+      - "requirements.lock.txt"
+      - "server.py"
+      - "smoke_test.py"
+      - "settings.example.json"
+      - "toolbox/**"
+      - ".github/workflows/container-check.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - name: Build the Linux image
+        run: docker build -t codex-toolbox-check .
+      - name: Inspect server capabilities
+        run: docker run --rm codex-toolbox-check --check
+      - name: Exercise all MCP tools in the image
+        run: docker run --rm --entrypoint python codex-toolbox-check /app/smoke_test.py --workdir /tmp/toolbox-verification

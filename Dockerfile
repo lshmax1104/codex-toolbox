@@ -13,7 +13,7 @@ WORKDIR /app
 COPY requirements.lock.txt ./
 RUN pip install --no-cache-dir -r requirements.lock.txt
 
-COPY server.py settings.example.json ./
+COPY server.py settings.example.json smoke_test.py ./
 COPY toolbox ./toolbox
 RUN mkdir -p /home/mcp/Documents/Codex /app/.state \
     && chown -R mcp:mcp /home/mcp /app
