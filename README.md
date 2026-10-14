@@ -1,6 +1,29 @@
 # Codex Toolbox MCP
 
-**A local Model Context Protocol (MCP) server for OpenAI Codex with 57 tools.**
+**Work with local spreadsheets, documents, and development tasks from a Codex conversation.**
+
+Codex Toolbox provides 57 reusable MCP tools with configurable project folders, file backups,
+and persistent notes. It runs locally over stdio and does not require an LLM API key.
+
+**로컬 CSV·엑셀·PDF 작업과 개발 점검을 Codex 대화에서 처리하는 MCP 서버입니다.**
+
+## What can I use it for?
+
+After [installation](#windows-installation-for-codex), add your project folder to
+`settings.json` → `allowed_roots`, reload the MCP connection, and try one of these prompts:
+
+| Workflow | Example request to Codex | Tools used |
+|---|---|---|
+| CSV → Excel report | “Read `sales.csv`, check missing values and numeric totals, and save the findings to `sales-report.xlsx`.” | `csv_read`, `csv_summary`, `xlsx_write` |
+| Extract PDF pages | “Take pages 1, 3 and 5 from `manual.pdf` and save them as `selected-pages.pdf`.” | `document_extract`, `pdf_select_pages` |
+| Review a project | “Show the current Git changes and recent commits, then list the configured validation tasks.” | `git_status`, `git_diff`, `git_log`, `tasks_list` |
+
+Codex combines the tools to complete the request; the server supplies the file and data
+operations. Existing-file overwrites are explicit and backed up. SQLite writes are disabled
+by default, and external APIs need their own configuration.
+
+한국어로도 요청할 수 있습니다. 예: “`sales.csv`의 누락값과 숫자 통계를 확인하고 결과를 엑셀로 저장해줘.”
+
 File search and editing, backups, ZIP archives, PDF and Word extraction, CSV/Excel processing,
 SQLite queries, Git inspection, HTTP requests, image conversion, persistent notes, and named
 development tasks are available over stdio. It exposes 2 resources and 3 prompts, uses the
